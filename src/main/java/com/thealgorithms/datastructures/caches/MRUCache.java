@@ -124,10 +124,14 @@ public class MRUCache<K, V> {
         private I key;
         private J value;
 
-        public Entry() {
-        }
+        public Entry() {}
 
-        public Entry(Entry<I, J> preEntry, Entry<I, J> nextEntry, I key, J value) {
+        public Entry(
+            Entry<I, J> preEntry,
+            Entry<I, J> nextEntry,
+            I key,
+            J value
+        ) {
             this.preEntry = preEntry;
             this.nextEntry = nextEntry;
             this.key = key;
@@ -165,17 +169,5 @@ public class MRUCache<K, V> {
         public void setValue(J value) {
             this.value = value;
         }
-    }
-
-    public static void main(String[] args) {
-        final MRUCache<String, Integer> cache = new MRUCache<>(2);
-        cache.put("Key1", 1);
-        cache.put("Key2", 2);
-        cache.put("Key3", 3);
-        cache.put("Key4", 4);
-        System.out.println("getValue(Key1): " + cache.get("Key1"));
-        System.out.println("getValue(Key2): " + cache.get("Key2"));
-        System.out.println("getValue(Key3): " + cache.get("Key3"));
-        System.out.println("getValue(Key4): " + cache.get("Key4"));
     }
 }

@@ -18,7 +18,11 @@ public class TrinomialTriangle {
             return 0;
         }
 
-        return TrinomialValue(n - 1, k - 1) + TrinomialValue(n - 1, k) + TrinomialValue(n - 1, k + 1);
+        return (
+            TrinomialValue(n - 1, k - 1) +
+            TrinomialValue(n - 1, k) +
+            TrinomialValue(n - 1, k + 1)
+        );
     }
 
     public static void printTrinomial(int n) {
@@ -35,7 +39,7 @@ public class TrinomialTriangle {
         }
     }
 
-    public static void main(String argc[]) {
+    public static void main(String[] argc) {
         int n = 6;
         printTrinomial(n);
     }

@@ -23,7 +23,7 @@ class CombSort implements SortAlgorithm {
     private int nextGap(int gap) {
         // Shrink gap by Shrink factor
         gap = (gap * 10) / 13;
-        return (gap < 1) ? 1 : gap;
+        return Math.max(gap, 1);
     }
 
     /**
@@ -54,7 +54,8 @@ class CombSort implements SortAlgorithm {
             for (int i = 0; i < size - gap; i++) {
                 if (less(arr[i + gap], arr[i])) {
                     // Swap arr[i] and arr[i+gap]
-                    swapped = swap(arr, i, i + gap);
+                    swap(arr, i, i + gap);
+                    swapped = true;
                 }
             }
         }
@@ -64,7 +65,26 @@ class CombSort implements SortAlgorithm {
     // Driver method
     public static void main(String[] args) {
         CombSort ob = new CombSort();
-        Integer[] arr = {8, 4, 1, 56, 3, -44, -1, 0, 36, 34, 8, 12, -66, -78, 23, -6, 28, 0};
+        Integer[] arr = {
+            8,
+            4,
+            1,
+            56,
+            3,
+            -44,
+            -1,
+            0,
+            36,
+            34,
+            8,
+            12,
+            -66,
+            -78,
+            23,
+            -6,
+            28,
+            0,
+        };
         ob.sort(arr);
 
         System.out.println("sorted array");

@@ -62,21 +62,20 @@ public class AVLTree {
             }
             return;
         }
+        Node child;
         if (node.left != null) {
-            Node child = node.left;
+            child = node.left;
             while (child.right != null) {
                 child = child.right;
             }
-            node.key = child.key;
-            delete(child);
         } else {
-            Node child = node.right;
+            child = node.right;
             while (child.left != null) {
                 child = child.left;
             }
-            node.key = child.key;
-            delete(child);
         }
+        node.key = child.key;
+        delete(child);
     }
 
     public void delete(int delKey) {
@@ -105,7 +104,6 @@ public class AVLTree {
             } else {
                 n = rotateLeftThenRight(n);
             }
-
         } else if (n.balance == 2) {
             if (height(n.right.right) >= height(n.right.left)) {
                 n = rotateLeft(n);
@@ -122,7 +120,6 @@ public class AVLTree {
     }
 
     private Node rotateLeft(Node a) {
-
         Node b = a.right;
         b.parent = a.parent;
 
@@ -149,7 +146,6 @@ public class AVLTree {
     }
 
     private Node rotateRight(Node a) {
-
         Node b = a.left;
         b.parent = a.parent;
 
@@ -219,11 +215,7 @@ public class AVLTree {
 
     public boolean search(int key) {
         Node result = searchHelper(this.root, key);
-        if (result != null) {
-            return true;
-        }
-
-        return false;
+        return result != null;
     }
 
     private Node searchHelper(Node root, int key) {

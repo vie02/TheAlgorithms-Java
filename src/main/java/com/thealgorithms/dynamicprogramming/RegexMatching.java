@@ -52,7 +52,12 @@ public class RegexMatching {
 
     // Method 2: Using Recursion and breaking string using virtual index
     // Time Complexity=0(2^(N+M)) Space Complexity=Recursion Extra Space
-    static boolean regexRecursion(String src, String pat, int svidx, int pvidx) {
+    static boolean regexRecursion(
+        String src,
+        String pat,
+        int svidx,
+        int pvidx
+    ) {
         if (src.length() == svidx && pat.length() == pvidx) {
             return true;
         }
@@ -85,7 +90,13 @@ public class RegexMatching {
 
     // Method 3: Top-Down DP(Memoization)
     // Time Complexity=0(N*M) Space Complexity=0(N*M)+Recursion Extra Space
-    static boolean regexRecursion(String src, String pat, int svidx, int pvidx, int[][] strg) {
+    static boolean regexRecursion(
+        String src,
+        String pat,
+        int svidx,
+        int pvidx,
+        int[][] strg
+    ) {
         if (src.length() == svidx && pat.length() == pvidx) {
             return true;
         }
@@ -101,7 +112,7 @@ public class RegexMatching {
             return true;
         }
         if (strg[svidx][pvidx] != 0) {
-            return strg[svidx][pvidx] == 1 ? false : true;
+            return strg[svidx][pvidx] != 1;
         }
         char chs = src.charAt(svidx);
         char chp = pat.charAt(pvidx);
@@ -116,15 +127,14 @@ public class RegexMatching {
         } else {
             ans = false;
         }
-        strg[svidx][pvidx] = ans == false ? 1 : 2;
+        strg[svidx][pvidx] = ans ? 2 : 1;
         return ans;
     }
 
     // Method 4: Bottom-Up DP(Tabulation)
     // Time Complexity=0(N*M) Space Complexity=0(N*M)
     static boolean regexBU(String src, String pat) {
-
-        boolean strg[][] = new boolean[src.length() + 1][pat.length() + 1];
+        boolean[][] strg = new boolean[src.length() + 1][pat.length() + 1];
         strg[src.length()][pat.length()] = true;
         for (int row = src.length(); row >= 0; row--) {
             for (int col = pat.length() - 1; col >= 0; col--) {
@@ -156,16 +166,16 @@ public class RegexMatching {
     }
 
     public static void main(String[] args) {
-
         String src = "aa";
         String pat = "*";
         System.out.println("Method 1: " + regexRecursion(src, pat));
         System.out.println("Method 2: " + regexRecursion(src, pat, 0, 0));
-        System.out.println("Method 3: " + regexRecursion(src, pat, 0, 0, new int[src.length()][pat.length()]));
+        System.out.println(
+            "Method 3: " +
+            regexRecursion(src, pat, 0, 0, new int[src.length()][pat.length()])
+        );
         System.out.println("Method 4: " + regexBU(src, pat));
-
     }
-
 }
 // Memoization vs Tabulation : https://www.geeksforgeeks.org/tabulation-vs-memoization/
 // Question Link : https://practice.geeksforgeeks.org/problems/wildcard-pattern-matching/1

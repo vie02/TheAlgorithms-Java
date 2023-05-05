@@ -5,7 +5,7 @@ import java.util.StringJoiner;
 /**
  * https://en.wikipedia.org/wiki/Linked_list
  */
-public class SinglyLinkedList extends Node{
+public class SinglyLinkedList extends Node {
 
     /**
      * Head refer to the front of the list
@@ -55,43 +55,59 @@ public class SinglyLinkedList extends Node{
     }
 
     /**
+     * Return the node in the middle of the list
+     * If the length of the list is even then return item number length/2
+     * @return middle node of the list
+     */
+    public Node middle() {
+        if (head == null) {
+            return null;
+        }
+        Node firstCounter = head;
+        Node secondCounter = firstCounter.next;
+        while (secondCounter != null && secondCounter.next != null) {
+            firstCounter = firstCounter.next;
+            secondCounter = secondCounter.next.next;
+        }
+        return firstCounter;
+    }
+
+    /**
      * Swaps nodes of two given values a and b.
-  *
+     *
      */
     public void swapNodes(int valueFirst, int valueSecond) {
-        if(valueFirst ==  valueSecond){
+        if (valueFirst == valueSecond) {
             return;
         }
-        Node previousA = null ,currentA = head;
-        while(currentA != null && currentA.value != valueFirst){
+        Node previousA = null, currentA = head;
+        while (currentA != null && currentA.value != valueFirst) {
             previousA = currentA;
             currentA = currentA.next;
         }
 
-        Node previousB = null ,currentB = head;
-        while(currentB != null && currentB.value != valueSecond){
+        Node previousB = null, currentB = head;
+        while (currentB != null && currentB.value != valueSecond) {
             previousB = currentB;
             currentB = currentB.next;
         }
         /** If either of 'a' or 'b' is not present, then return */
-        if(currentA == null || currentB == null){
+        if (currentA == null || currentB == null) {
             return;
         }
 
         // If 'a' is not head node of list
-        if(previousA != null){
+        if (previousA != null) {
             previousA.next = currentB;
-        }
-        else{
+        } else {
             // make 'b' as the new head
             head = currentB;
         }
 
         // If 'b' is not head node of list
-        if(previousB != null){
+        if (previousB != null) {
             previousB.next = currentA;
-        }
-        else{
+        } else {
             // Make 'a' as new head
             head = currentA;
         }
@@ -106,20 +122,23 @@ public class SinglyLinkedList extends Node{
      * Reverse a singly linked list from a given node till the end
      *
      */
-    Node reverseList(Node node) {
-        Node prevNode = head;
-        while(prevNode.next!=node){
-            prevNode = prevNode.next;
-        }
-        Node prev = null, curr = node, next;
-        while (curr != null) {
-            next = curr.next;
+    public Node reverseList(Node node) {
+        Node prev = null;
+        Node curr = node;
+        
+        while (curr != null && curr.next != null) {
+            Node next=curr.next;
             curr.next = prev;
             prev = curr;
             curr = next;
         }
-        prevNode.next = prev;
-        return head;
+        //when curr.next==null, the current element is left without pointing it to its prev,so 
+        if(curr != null){
+            curr.next = prev;
+            prev=curr;
+        }
+        //prev will be pointing to the last element in the Linkedlist, it will be the new head of the reversed linkedlist
+        return prev;
     }
 
     /**
@@ -216,7 +235,6 @@ public class SinglyLinkedList extends Node{
     }
 
     public void deleteDuplicates() {
-
         Node pred = head;
         // predecessor = the node
         // having sublist of its duplicates
@@ -226,13 +244,14 @@ public class SinglyLinkedList extends Node{
             // skip all duplicates
             if (newHead.next != null && newHead.value == newHead.next.value) {
                 // move till the end of duplicates sublist
-                while (newHead.next != null && newHead.value == newHead.next.value) {
+                while (
+                    newHead.next != null && newHead.value == newHead.next.value
+                ) {
                     newHead = newHead.next;
                 }
                 // skip all duplicates
                 pred.next = newHead.next;
                 newHead = null;
-
                 // otherwise, move predecessor
             }
             // move forward
@@ -301,7 +320,6 @@ public class SinglyLinkedList extends Node{
         newNode.next = cur.next;
         cur.next = newNode;
         size++;
-
     }
 
     /**
@@ -375,6 +393,7 @@ public class SinglyLinkedList extends Node{
             throw new IndexOutOfBoundsException(position + "");
         }
     }
+
     /**
      * Driver Code
      */
@@ -391,19 +410,24 @@ public class SinglyLinkedList extends Node{
         list.insert(3);
         list.insertNth(1, 4);
         assert list.toString().equals("10->7->5->3->1");
-        System.out.println(list.toString());
+        System.out.println(list);
         /* Test search function */
-        assert list.search(10) && list.search(5) && list.search(1) && !list.search(100);
+        assert list.search(10) &&
+        list.search(5) &&
+        list.search(1) &&
+        !list.search(100);
 
         /* Test get function */
-        assert list.getNth(0) == 10 && list.getNth(2) == 5 && list.getNth(4) == 1;
+        assert list.getNth(0) == 10 &&
+        list.getNth(2) == 5 &&
+        list.getNth(4) == 1;
 
         /* Test delete function */
         list.deleteHead();
         list.deleteNth(1);
         list.delete();
         assert list.toString().equals("7->3");
-        System.out.println(list.toString());
+        System.out.println(list);
         assert list.size == 2 && list.size() == list.count();
 
         list.clear();
@@ -419,13 +443,14 @@ public class SinglyLinkedList extends Node{
         }
 
         SinglyLinkedList instance = new SinglyLinkedList();
-        Node head = new Node(0, new Node(2, new Node(3, new Node(3, new Node(4)))));
+        Node head = new Node(
+            0,
+            new Node(2, new Node(3, new Node(3, new Node(4))))
+        );
         instance.setHead(head);
         instance.deleteDuplicates();
         instance.print();
-
     }
-
 }
 
 /**
@@ -444,8 +469,7 @@ class Node {
      */
     Node next;
 
-    Node() {
-    }
+    Node() {}
 
     /**
      * Constructor
@@ -466,5 +490,4 @@ class Node {
         this.value = value;
         this.next = next;
     }
-
 }

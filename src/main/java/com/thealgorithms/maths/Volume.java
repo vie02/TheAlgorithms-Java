@@ -1,120 +1,91 @@
 package com.thealgorithms.maths;
 
-
-/* Find volume of various shapes.*/
+/* Calculate the volume of various shapes.*/
 public class Volume {
-
-    public static void main(String[] args) {
-
-        /* test cube */
-        assert Double.compare(volumeCube(7), 343.0) == 0;
-
-        /* test cuboid */
-        assert Double.compare(volumeCuboid(2, 5, 7), 70.0) == 0;
-
-        /* test sphere */
-        assert Double.compare(volumeSphere(5), 523.5987755982989) == 0;
-
-        /* test cylinder */
-        assert Double.compare(volumeCylinder(1, 2), 12.566370614359172) == 0;
-
-        /* test hemisphere */
-        assert Double.compare(volumeHemisphere(5), 261.79938779914943) == 0;
-
-        /* test cone */
-        assert Double.compare(volumeCone(5, 7), 916.297857297023) == 0;
-        
-        /*test prism*/
-        assert Double.compare(volumePrism(10, 2), 20.0) == 0;
-        
-        /*test pyramid*/
-        assert Double.compare(volumePyramid(10, 3), 10.0) == 0;
-
-    }
 
     /**
      * Calculate the volume of a cube.
      *
-     * @param sideLength side length of cube
-     * @return volume of given cube
+     * @param sideLength length of the given cube's sides
+     * @return volume of the given cube
      */
-    private static double volumeCube(double sidelength) {
-        return sidelength * sidelength * sidelength;
+    public static double volumeCube(double sideLength) {
+        return sideLength * sideLength * sideLength;
     }
 
     /**
      * Calculate the volume of a cuboid.
      *
-     * @param width of cuboid
-     * @param height of cuboid
-     * @param length of cuboid
+     * @param width  width of given cuboid
+     * @param height height of given cuboid
+     * @param length length of given cuboid
      * @return volume of given cuboid
      */
-    private static double volumeCuboid(double width, double height, double length) {
+    public static double volumeCuboid(double width, double height, double length) {
         return width * height * length;
     }
 
     /**
      * Calculate the volume of a sphere.
      *
-     * @param radius radius of sphere
+     * @param radius radius of given sphere
      * @return volume of given sphere
      */
-    private static double volumeSphere(double radius) {
-        return 4 / 3 * Math.PI * radius * radius * radius;
+    public static double volumeSphere(double radius) {
+        return (4 * Math.PI * radius * radius * radius) / 3;
     }
 
     /**
      * Calculate volume of a cylinder
      *
-     * @param radius radius of the floor
-     * @param height height of the cylinder.
+     * @param radius radius of the given cylinder's floor
+     * @param height height of the given cylinder
      * @return volume of given cylinder
      */
-    private static double volumeCylinder(double radius, double height) {
+    public static double volumeCylinder(double radius, double height) {
         return Math.PI * radius * radius * height;
     }
 
     /**
      * Calculate the volume of a hemisphere.
      *
-     * @param radius radius of hemisphere
+     * @param radius radius of given hemisphere
      * @return volume of given hemisphere
      */
-    private static double volumeHemisphere(double radius) {
-        return 2 / 3 * Math.PI * radius * radius * radius;
+    public static double volumeHemisphere(double radius) {
+        return (2 * Math.PI * radius * radius * radius) / 3;
     }
 
     /**
      * Calculate the volume of a cone.
      *
-     * @param radius radius of cone.
-     * @param height of cone.
-     * @return volume of given cone.
+     * @param radius radius of given cone
+     * @param height of given cone
+     * @return volume of given cone
      */
-    private static double volumeCone(double radius, double height) {
-        return Math.PI * radius * radius * height / 3;
+    public static double volumeCone(double radius, double height) {
+        return (Math.PI * radius * radius * height) / 3;
     }
-    
+
     /**
      * Calculate the volume of a prism.
      *
-     * @param area of the base.
-     * @param height of prism.
-     * @return volume of given prism.
+     * @param baseArea  area of the given prism's base
+     * @param height of given prism
+     * @return volume of given prism
      */
-    private static double volumePrism(double basearea, double height) {
-        return basearea * height;
+    public static double volumePrism(double baseArea, double height) {
+        return baseArea * height;
     }
-    
+
     /**
      * Calculate the volume of a pyramid.
      *
-     * @param area of the base.
-     * @param height of pyramid.
-     * @return volume of given pyramid.
+     * @param baseArea   of the given pyramid's base
+     * @param height of given pyramid
+     * @return volume of given pyramid
      */
-    private static double volumePyramid(double basearea, double height) {
-        return basearea * height / 3;
+    public static double volumePyramid(double baseArea, double height) {
+        return (baseArea * height) / 3;
     }
 }

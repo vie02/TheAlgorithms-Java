@@ -1,9 +1,9 @@
 package com.thealgorithms.datastructures.graphs;
 
-import java.util.List;
-import java.util.Queue;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /**
  * Implementation of a graph in a matrix form Also known as an adjacency matrix
@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class MatrixGraphs {
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph(10);
         graph.addEdge(1, 2);
         graph.addEdge(1, 5);
@@ -71,7 +71,9 @@ class AdjacencyMatrixGraph {
     public AdjacencyMatrixGraph(int givenNumberOfVertices) {
         this.setNumberOfVertices(givenNumberOfVertices);
         this.setNumberOfEdges(0);
-        this.setAdjacency(new int[givenNumberOfVertices][givenNumberOfVertices]);
+        this.setAdjacency(
+                new int[givenNumberOfVertices][givenNumberOfVertices]
+            );
         for (int i = 0; i < givenNumberOfVertices; i++) {
             for (int j = 0; j < givenNumberOfVertices; j++) {
                 this.adjacency()[i][j] = AdjacencyMatrixGraph.EDGE_NONE;
@@ -101,7 +103,7 @@ class AdjacencyMatrixGraph {
      * Updates the number of edges in the graph
      *
      * @param newNumberOfEdges
-   *
+     *
      */
     private void setNumberOfEdges(int newNumberOfEdges) {
         this._numberOfEdges = newNumberOfEdges;
@@ -152,11 +154,7 @@ class AdjacencyMatrixGraph {
      * @return whether or not the vertex exists
      */
     public boolean vertexDoesExist(int aVertex) {
-        if (aVertex >= 0 && aVertex < this.numberOfVertices()) {
-            return true;
-        } else {
-            return false;
-        }
+        return aVertex >= 0 && aVertex < this.numberOfVertices();
     }
 
     /**
@@ -249,7 +247,11 @@ class AdjacencyMatrixGraph {
      * has been visited
      * @param orderList the list to add vertices to as they are visited
      */
-    private void depthFirstOrder(int currentVertex, boolean[] visited, List<Integer> orderList) {
+    private void depthFirstOrder(
+        int currentVertex,
+        boolean[] visited,
+        List<Integer> orderList
+    ) {
         // If this vertex has already been visited, do nothing and return
         if (visited[currentVertex]) {
             return;
@@ -262,9 +264,11 @@ class AdjacencyMatrixGraph {
 
         // Get the adjacency array for this vertex
         int[] adjacent = _adjacency[currentVertex];
-        for (int i = 0; i < adjacent.length; i++) // If an edge exists between the currentVertex and the vertex
-        // we are considering exploring, recurse on it
-        {
+        for (
+            int i = 0;
+            i < adjacent.length;
+            i++
+        ) { // we are considering exploring, recurse on it // If an edge exists between the currentVertex and the vertex
             if (adjacent[i] == AdjacencyMatrixGraph.EDGE_EXIST) {
                 depthFirstOrder(i, visited, orderList);
             }
@@ -310,12 +314,14 @@ class AdjacencyMatrixGraph {
             orderList.add(currentVertex);
             visited[currentVertex] = true;
 
-            // Get the adjacency array for the currentVertex and 
+            // Get the adjacency array for the currentVertex and
             // check each node
             int[] adjacent = _adjacency[currentVertex];
-            for (int vertex = 0; vertex < adjacent.length; vertex++) // If an edge exists between the current vertex and the
-            // vertex we are considering exploring, we add it to the queue
-            {
+            for (
+                int vertex = 0;
+                vertex < adjacent.length;
+                vertex++
+            ) { // vertex we are considering exploring, we add it to the queue // If an edge exists between the current vertex and the
                 if (adjacent[vertex] == AdjacencyMatrixGraph.EDGE_EXIST) {
                     queue.add(vertex);
                 }
@@ -333,14 +339,14 @@ class AdjacencyMatrixGraph {
     public String toString() {
         String s = "    ";
         for (int i = 0; i < this.numberOfVertices(); i++) {
-            s = s + String.valueOf(i) + " ";
+            s = s + i + " ";
         }
         s = s + " \n";
 
         for (int i = 0; i < this.numberOfVertices(); i++) {
-            s = s + String.valueOf(i) + " : ";
+            s = s + i + " : ";
             for (int j = 0; j < this.numberOfVertices(); j++) {
-                s = s + String.valueOf(this._adjacency[i][j]) + " ";
+                s = s + this._adjacency[i][j] + " ";
             }
             s = s + "\n";
         }

@@ -29,8 +29,12 @@ public class LowestBasePalindrome {
                 in.next();
             }
         }
-        System.out.println(n + " is a palindrome in base " + lowestBasePalindrome(n));
-        System.out.println(base2base(Integer.toString(n), 10, lowestBasePalindrome(n)));
+        System.out.println(
+            n + " is a palindrome in base " + lowestBasePalindrome(n)
+        );
+        System.out.println(
+            base2base(Integer.toString(n), 10, lowestBasePalindrome(n))
+        );
         in.close();
     }
 
@@ -135,7 +139,7 @@ public class LowestBasePalindrome {
             // If the remainder is a digit < 10, simply add it to
             // the left side of the new number.
             if (decimalValue % b2 < 10) {
-                output = Integer.toString(decimalValue % b2) + output;
+                output = decimalValue % b2 + output;
             } // If the remainder is >= 10, add a character with the
             // corresponding value to the new number. (A = 10, B = 11, C = 12, ...)
             else {

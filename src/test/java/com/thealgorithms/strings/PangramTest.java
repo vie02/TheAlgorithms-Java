@@ -1,24 +1,20 @@
 package com.thealgorithms.strings;
 
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-
 public class PangramTest {
+
     @Test
-    public void isPangram() {
-        String fullAlphabet = "abcdefghijklmnopqrstuvwxyz";
-        String notFullAlphabet = "abcdefghiklmnopqrstuvwxyz";
-        String fullMixedCaseAlphabet = "a BCDE fghIjkLMnop qrSTuv WXYz";
-        String sentence1 = "The quick brown fox jumps over the lazy dog";
-        String sentence2 = "The quick brown fox jumps over the lazy gentleman";  // missing letter d
-
-        assertTrue(Pangram.isPangram(fullAlphabet));
-        assertFalse(Pangram.isPangram(notFullAlphabet));
-        assertTrue(Pangram.isPangram(fullMixedCaseAlphabet));
-        assertTrue(Pangram.isPangram(sentence1));
-        assertFalse(Pangram.isPangram(sentence2));
-
+    public void testPangram() {
+        assertTrue(Pangram.isPangram("The quick brown fox jumps over the lazy dog"));
+        assertFalse(Pangram.isPangram("The quick brown fox jumps over the azy dog")); // L is missing
+        assertFalse(Pangram.isPangram("+-1234 This string is not alphabetical"));
+        assertFalse(Pangram.isPangram("\u0000/\\ Invalid characters are alright too"));
+        
+        assertTrue(Pangram.isPangram2("The quick brown fox jumps over the lazy dog"));
+        assertFalse(Pangram.isPangram2("The quick brown fox jumps over the azy dog")); // L is missing
+        assertFalse(Pangram.isPangram2("+-1234 This string is not alphabetical"));
+        assertFalse(Pangram.isPangram2("\u0000/\\ Invalid characters are alright too"));
     }
 }

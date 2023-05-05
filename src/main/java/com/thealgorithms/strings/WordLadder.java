@@ -1,10 +1,10 @@
 package com.thealgorithms.strings;
 
-import java.util.List;
 import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 /*
     **Problem Statement:**
@@ -34,20 +34,8 @@ import java.util.HashSet;
     beginWord != endWord
     All the words in wordList are unique.
  */
+
 class WordLadder {
-
-    /**
-     * Driver Code
-     */
-    public static void main(String[] args) {
-
-        String beginWord = "hit";
-        String endWord = "cog";
-        String words[] = {"hot", "dot", "dog", "lot", "log", "cog"};
-        List<String> wordList = Arrays.asList(words);
-
-        System.out.println("Ladder Length: " + ladderLength(beginWord, endWord, wordList));
-    }
 
     /**
      * This function finds the ladderLength
@@ -60,10 +48,7 @@ class WordLadder {
      * if the endword is there. Otherwise, will return the length as 0.
      */
     public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        HashSet<String> set = new HashSet();
-        for (String word : wordList) {
-            set.add(word);
-        }
+        HashSet<String> set = new HashSet(wordList);
 
         if (!set.contains(endWord)) {
             return 0;

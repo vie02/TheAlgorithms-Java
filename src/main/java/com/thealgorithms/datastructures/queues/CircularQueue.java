@@ -17,21 +17,13 @@ public class CircularQueue {
     }
 
     public boolean isEmpty() {
-        if (beginningOfQueue == -1) {
-            return true;
-        } else {
-            return false;
-        }
+        return beginningOfQueue == -1;
     }
 
     public boolean isFull() {
         if (topOfQueue + 1 == beginningOfQueue) {
             return true;
-        } else if (topOfQueue == size - 1 && beginningOfQueue == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        } else return topOfQueue == size - 1 && beginningOfQueue == 0;
     }
 
     public void enQueue(int value) {
@@ -69,7 +61,6 @@ public class CircularQueue {
             }
             return res;
         }
-
     }
 
     public int peek() {
@@ -85,7 +76,6 @@ public class CircularQueue {
         arr = null;
         System.out.println("The Queue is deleted!");
     }
-
 
     public static void main(String[] args) {
         CircularQueue cq = new CircularQueue(5);
@@ -110,6 +100,5 @@ public class CircularQueue {
         System.out.println(cq.peek());
         System.out.println(cq.peek());
         cq.deleteQueue();
-
     }
 }
